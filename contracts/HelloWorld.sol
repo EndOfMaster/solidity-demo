@@ -1,8 +1,15 @@
-pragma solidity ^0.5.0;
+pragma solidity >=0.4.21 <0.7.0;
 
 contract HelloWorld {
 
-    function helloWorld() public pure returns (string memory) {
-        return "Hello, World!";
+    address public owner;
+
+    constructor() public {
+        owner = msg.sender;
     }
+
+    function helloWorld() public pure returns (string memory){
+        return ("HelloWorld");
+    }
+
 }

@@ -20,6 +20,8 @@ function minter() external view returns (address) { return minter; }
 自己写一个的话会重复
 #### struct
 声明对象
+#### payable
+如果一个函数需要进行货币操作，必须要带上payable关键字，这样才能正常接收msg.value。
 
 #### 数组
 ``` sol
@@ -36,6 +38,10 @@ proposals.push(Proposal({
     voteCount : 0
 }));
 ```
+#### event
+声明事件
+#### emit
+触发事件
 
 
 ## 杂项

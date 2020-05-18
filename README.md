@@ -1,3 +1,4 @@
+# 学习笔记
 ## 关键字
 #### memory
 值传递，默认为值传递，只会传递值，不同对象的后续变化都是独立的
@@ -42,8 +43,21 @@ proposals.push(Proposal({
 声明事件
 #### emit
 触发事件
-
-
+#### modifier
+使用 modifier 可以更便捷的校验函数的入参。
+新的函数体是由 modifier 本身的函数体，并用原函数体替换 `_;` 语句来组成的。
+```sol
+modifier onlyOwner() {
+    require(msg.sender == owner);
+    _;
+} 
+  
+function hello() public onlyOwner returns(bool){
+    return ture;
+}
+```
+#### internal
+修饰的function只能在合约内部和继承的合约内调用
 ## 杂项
 #### msg.sender
 当前用户的公钥

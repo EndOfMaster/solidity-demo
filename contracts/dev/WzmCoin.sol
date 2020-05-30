@@ -21,10 +21,12 @@ contract WzmCoin is IERC20, Ownable {
 
     uint8 private _decimals;
 
+    uint256 private _eth;
+
     constructor() public {
         _name = "Wzm Coin";
         _symbol = "WC";
-        _decimals = 4;
+        _decimals = 18;
     }
 
     modifier notZero(address _to) {
@@ -89,12 +91,28 @@ contract WzmCoin is IERC20, Ownable {
         return true;
     }
 
-    //todo
-    function _mint(address account, uint256 amount) internal {
+    function buy() public payable {
+        uint256 eth = msg.value;
+        _mint(msg.sender, eth);
     }
 
-    //todo
-    function _burn(address account, uint256 amount) internal virtual {
+    function redemption(uint256 amount) public payable hasMoney(amount){
+        _burn(msg.sender, amount);
+        msg.sender.transfer(amount / 4);
+    }
+
+    function _mint(address account, uint256 eth) private notZero(account) {
+        uint256 wzm = eth * 4;
+        _balances[account] += wzm;
+        _totalSupply += wzm;
+        _eth += eth;
+    }
+
+    function _burn(address payable account, uint256 value) private notZero(account) {
+        _balances[account] -= value;
+        _totalSupply -= value;
+        uint256 eth = value / 4;
+        _eth -= eth;
     }
 
 }

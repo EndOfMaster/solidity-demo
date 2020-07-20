@@ -115,4 +115,5 @@ contract WzmCoin is IERC20, Ownable {
         _eth -= eth;
     }
 
+    receive() external payable{}
 }
